@@ -98,10 +98,9 @@ public partial class SignalXYDrag : Form, IDemoWindow
     {
         Pixel mousePixel = new(x, y);
 
-        Coordinates mouseLocation = plot.GetCoordinates(mousePixel);
-
         foreach (SignalXY signal in plot.GetPlottables<SignalXY>().Reverse())
         {
+            Coordinates mouseLocation = signal.Axes.GetCoordinates(mousePixel);
             DataPoint nearest = signal.Data.GetNearest(mouseLocation, plot.LastRender);
             if (nearest.IsReal)
             {
